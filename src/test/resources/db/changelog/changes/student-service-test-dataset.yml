@@ -1,0 +1,16 @@
+databaseChangeLog:
+  - changeSet:
+      id: student-service-test-1
+      author: Corentin Beuchet
+      context: student-service-test
+      changes:
+        - insert:
+            tableName: student
+            columns:
+              - column: { name: name, value: "Test" }
+              - column: { name: surname, value: "Student" }
+        - insert:
+            tableName: student
+            columns:
+              - column: { name: name, value: "Test2" }
+              - column: { name: surname, value: "Student2" }

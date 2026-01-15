@@ -1,0 +1,31 @@
+databaseChangeLog:
+  - changeSet:
+      id: 20240115-2
+      author: Corentin Beuchet
+      context: dev OR prod
+      changes:
+        - insert:
+            tableName: student
+            columns:
+              - column: { name: name, value: "Jean" }
+              - column: { name: surname, value: "Dupont" }
+        - insert:
+            tableName: student
+            columns:
+              - column: { name: name, value: "Marie" }
+              - column: { name: surname, value: "Curie" }
+        - insert:
+            tableName: student
+            columns:
+              - column: { name: name, value: "Henri" }
+              - column: { name: surname, value: "Poincaré" }
+        - insert:
+            tableName: student
+            columns:
+              - column: { name: name, value: "Thomas" }
+              - column: { name: surname, value: "Pesquet" }
+        - insert:
+            tableName: student
+            columns:
+              - column: { name: name, value: "Ada" }
+              - column: { name: surname, value: "Lovelace" }

@@ -1,0 +1,60 @@
+package ort._olen.course.service;
+
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import ort._olen.course.jpa.StudentEntityRepository;
+import ort._olen.course.model.Student;
+import ort._olen.course.model.dto.StudentDTO;
+import ort._olen.course.model.mapper.StudentMapper;
+import ort._olen.course.service.repository.StudentRepository;
+
+import java.util.List;
+import java.util.Optional;
+import java.util.Set;
+
+import static ort._olen.course.model.mapper.StudentMapper.toDTO;
+import static ort._olen.course.model.mapper.StudentMapper.toDTOs;
+
+@Service
+@Transactional
+public class StudentService implements StudentRepository {
+
+    private final StudentEntityRepository studentEntityRepository;
+
+    public StudentService(StudentEntityRepository studentEntityRepository) {
+        this.studentEntityRepository = studentEntityRepository;
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Set<StudentDTO> findAll() {
+        return toDTOs(studentEntityRepository.findAll());
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Optional<StudentDTO> findById(Long id) {
+        return studentEntityRepository.findById(id).map(StudentMapper::toDTO);
+    }
+
+    @Override
+    public StudentDTO save(StudentDTO studentDTO) {
+        Student entity = StudentMapper.toEntity(studentDTO);
+        return StudentMapper.toDTO(studentEntityRepository.save(entity));
+    }
+
+    @Override
+    public Optional<StudentDTO> update(Long id, StudentDTO studentDetails) {
+        return studentEntityRepository.findById(id)
+                .map(existingEntity -> {
+                    existingEntity.setName(studentDetails.name());
+                    existingEntity.setSurname(studentDetails.surname());
+                    return StudentMapper.toDTO(studentEntityRepository.save(existingEntity));
+                });
+    }
+
+    @Override
+    public void deleteById(Long id) {
+        studentEntityRepository.deleteById(id);
+    }
+}

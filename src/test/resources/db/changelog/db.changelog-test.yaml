@@ -1,0 +1,5 @@
+databaseChangeLog:
+  - include:
+      file: db/changelog/db.changelog-master.yaml # Includes your production schema
+  - include:
+      file: db/changelog/changes/student-service-test-dataset.yml

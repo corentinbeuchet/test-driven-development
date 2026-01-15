@@ -1,3 +1,8 @@
 spring:
+  profiles:
+    active: prod
   application:
-    name: course
+    name: tdd-course-app
+  liquibase:
+    change-log: classpath:db/changelog/db.changelog-master.yaml
+    contexts: ${spring.profiles.active}
