@@ -1,12 +1,11 @@
 package ort._olen.course.model.mapper;
 
-import ort._olen.course.model.Student;
+import ort._olen.course.jpa.entity.Student;
 import ort._olen.course.model.dto.StudentDTO;
 import ort._olen.course.model.dto.StudentSaveDTO;
 import ort._olen.course.model.dto.StudentsDTO;
 
 import java.util.Collection;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 public class StudentMapper {

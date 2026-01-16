@@ -1,4 +1,4 @@
-package ort._olen.course.model;
+package ort._olen.course.jpa.entity;
 
 import jakarta.persistence.*;
 

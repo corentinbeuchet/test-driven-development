@@ -2,19 +2,16 @@ package ort._olen.course.service;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ort._olen.course.jpa.StudentEntityRepository;
-import ort._olen.course.model.Student;
+import ort._olen.course.jpa.repository.StudentEntityRepository;
+import ort._olen.course.jpa.entity.Student;
 import ort._olen.course.model.dto.StudentDTO;
 import ort._olen.course.model.dto.StudentSaveDTO;
 import ort._olen.course.model.dto.StudentsDTO;
 import ort._olen.course.model.mapper.StudentMapper;
 import ort._olen.course.service.repository.StudentRepository;
 
-import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
-import static ort._olen.course.model.mapper.StudentMapper.toDTO;
 import static ort._olen.course.model.mapper.StudentMapper.toDTOs;
 
 @Service
