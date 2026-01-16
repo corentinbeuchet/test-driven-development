@@ -2,9 +2,11 @@ package ort._olen.course.service;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.TestPropertySource;
+import org.springframework.test.context.jdbc.Sql;
+import org.springframework.test.context.jdbc.SqlGroup;
 import ort._olen.course.configuration.IntegrationTest;
 import ort._olen.course.model.dto.StudentDTO;
+import ort._olen.course.model.dto.StudentSaveDTO;
 
 import java.util.Optional;
 import java.util.Set;
@@ -12,7 +14,12 @@ import java.util.Set;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @IntegrationTest
-@TestPropertySource(properties = "spring.liquibase.contexts=student-service-test")
+@SqlGroup({
+        @Sql(executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD,
+                scripts = {"classpath:datasets/repository/student-before.sql"}),
+        @Sql(executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD,
+                scripts = {"classpath:datasets/repository/student-after.sql"}),
+})
 class StudentServiceIT {
 
     @Autowired
@@ -44,7 +51,7 @@ class StudentServiceIT {
 
     @Test
     void shouldSaveNewStudent() {
-        StudentDTO toSave = new StudentDTO(null, "Marie", "Curie");
+        StudentSaveDTO toSave = new StudentSaveDTO("Marie", "Curie");
 
         StudentDTO saved = studentService.save(toSave);
 
@@ -57,7 +64,7 @@ class StudentServiceIT {
 
     @Test
     void shouldUpdateExistingStudent() {
-        StudentDTO updateDetails = new StudentDTO(null, "UpdatedName", "UpdatedSurname");
+        StudentSaveDTO updateDetails = new StudentSaveDTO("UpdatedName", "UpdatedSurname");
 
         Optional<StudentDTO> updated = studentService.update(1L, updateDetails);
 

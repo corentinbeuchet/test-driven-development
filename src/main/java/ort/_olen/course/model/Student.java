@@ -26,6 +26,7 @@ public class Student {
         this.name = name;
         this.surname = surname;
     }
+
     public static Student of(Long id, String name, String surname) {
         return new Student(id, name, surname);
     }

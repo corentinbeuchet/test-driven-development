@@ -5,6 +5,7 @@ import org.springframework.transaction.annotation.Transactional;
 import ort._olen.course.jpa.StudentEntityRepository;
 import ort._olen.course.model.Student;
 import ort._olen.course.model.dto.StudentDTO;
+import ort._olen.course.model.dto.StudentSaveDTO;
 import ort._olen.course.model.mapper.StudentMapper;
 import ort._olen.course.service.repository.StudentRepository;
 
@@ -38,13 +39,13 @@ public class StudentService implements StudentRepository {
     }
 
     @Override
-    public StudentDTO save(StudentDTO studentDTO) {
+    public StudentDTO save(StudentSaveDTO studentDTO) {
         Student entity = StudentMapper.toEntity(studentDTO);
         return StudentMapper.toDTO(studentEntityRepository.save(entity));
     }
 
     @Override
-    public Optional<StudentDTO> update(Long id, StudentDTO studentDetails) {
+    public Optional<StudentDTO> update(Long id, StudentSaveDTO studentDetails) {
         return studentEntityRepository.findById(id)
                 .map(existingEntity -> {
                     existingEntity.setName(studentDetails.name());
