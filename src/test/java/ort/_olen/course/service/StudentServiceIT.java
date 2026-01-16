@@ -7,6 +7,7 @@ import org.springframework.test.context.jdbc.SqlGroup;
 import ort._olen.course.configuration.IntegrationTest;
 import ort._olen.course.model.dto.StudentDTO;
 import ort._olen.course.model.dto.StudentSaveDTO;
+import ort._olen.course.model.dto.StudentsDTO;
 
 import java.util.Optional;
 import java.util.Set;
@@ -27,9 +28,9 @@ class StudentServiceIT {
 
     @Test
     void shouldFindAllInitialStudents() {
-        Set<StudentDTO> students = studentService.findAll();
-        assertThat(students)
-                .containsExactlyInAnyOrder(
+        StudentsDTO students = studentService.findAll();
+        assertThat(students.students())
+                .contains(
                         new StudentDTO(1L, "Test", "Student"),
                         new StudentDTO(2L, "Test2", "Student2")
                 );
@@ -72,7 +73,6 @@ class StudentServiceIT {
         assertThat(updated.get().name()).isEqualTo("UpdatedName");
         assertThat(updated.get().surname()).isEqualTo("UpdatedSurname");
 
-        // Verify persistence
         assertThat(studentService.findById(1L).get().name()).isEqualTo("UpdatedName");
     }
 

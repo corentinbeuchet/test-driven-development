@@ -6,6 +6,7 @@ import ort._olen.course.jpa.StudentEntityRepository;
 import ort._olen.course.model.Student;
 import ort._olen.course.model.dto.StudentDTO;
 import ort._olen.course.model.dto.StudentSaveDTO;
+import ort._olen.course.model.dto.StudentsDTO;
 import ort._olen.course.model.mapper.StudentMapper;
 import ort._olen.course.service.repository.StudentRepository;
 
@@ -28,7 +29,7 @@ public class StudentService implements StudentRepository {
 
     @Override
     @Transactional(readOnly = true)
-    public Set<StudentDTO> findAll() {
+    public StudentsDTO findAll() {
         return toDTOs(studentEntityRepository.findAll());
     }
 

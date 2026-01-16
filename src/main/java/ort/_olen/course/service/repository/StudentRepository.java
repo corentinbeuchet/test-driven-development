@@ -2,13 +2,14 @@ package ort._olen.course.service.repository;
 
 import ort._olen.course.model.dto.StudentDTO;
 import ort._olen.course.model.dto.StudentSaveDTO;
+import ort._olen.course.model.dto.StudentsDTO;
 
 import java.util.Optional;
 import java.util.Set;
 
 public interface StudentRepository {
 
-    Set<StudentDTO> findAll();
+    StudentsDTO findAll();
 
     Optional<StudentDTO> findById(Long id);
 

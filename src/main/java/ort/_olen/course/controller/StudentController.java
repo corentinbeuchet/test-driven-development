@@ -6,8 +6,7 @@ import ort._olen.course.model.dto.StudentDTO;
 import ort._olen.course.model.dto.StudentSaveDTO;
 import ort._olen.course.service.StudentService;
 
-import java.util.List;
-import java.util.Set;
+import java.util.Collection;
 
 @RestController
 @RequestMapping("/api/students")
@@ -20,8 +19,8 @@ public class StudentController {
     }
 
     @GetMapping
-    public ResponseEntity<Set<StudentDTO>> getStudents() {
-        return ResponseEntity.ok(studentService.findAll());
+    public ResponseEntity<Collection<StudentDTO>> getStudents() {
+        return ResponseEntity.ok(studentService.findAll().students());
     }
 
 
@@ -46,11 +45,7 @@ public class StudentController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteStudent(@PathVariable Long id) {
-        return studentService.findById(id)
-                .map(student -> {
-                    studentService.deleteById(id);
-                    return ResponseEntity.noContent().<Void>build();
-                })
-                .orElse(ResponseEntity.notFound().build());
+        studentService.deleteById(id);
+        return ResponseEntity.noContent().build();
     }
 }
