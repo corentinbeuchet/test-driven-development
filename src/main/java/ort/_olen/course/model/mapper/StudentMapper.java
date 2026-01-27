@@ -14,7 +14,7 @@ public class StudentMapper {
     }
 
     public static StudentDTO toDTO(Student student) {
-        return new StudentDTO(student.getId(), student.getName(), student.getSurname());
+        return new StudentDTO(student.getId(), student.getName(), student.getSurname(), student.getBirthdate());
     }
 
     public static StudentsDTO toDTOs(Collection<Student> students) {
@@ -22,6 +22,6 @@ public class StudentMapper {
     }
 
     public static Student toEntity(StudentSaveDTO studentDTO) {
-        return Student.of(null, studentDTO.name(), studentDTO.surname());
+        return Student.of(null, studentDTO.name(), studentDTO.surname(), studentDTO.birthdate());
     }
 }

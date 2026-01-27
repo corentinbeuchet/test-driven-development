@@ -12,8 +12,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.jdbc.datasource.init.ResourceDatabasePopulator;
 import ort._olen.course.configuration.CucumberSpringConfiguration;
 import ort._olen.course.model.dto.StudentDTO;
+import ort._olen.course.model.dto.StudentSaveDTO;
 
 import javax.sql.DataSource;
+import java.time.LocalDate;
 import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -44,7 +46,7 @@ public class StudentSteps extends CucumberSpringConfiguration {
 
     @When("I create a student with name {string} and surname {string}")
     public void iCreateAStudent(String name, String surname) {
-        StudentDTO newStudent = new StudentDTO(null, name, surname);
+        StudentSaveDTO newStudent = new StudentSaveDTO(name, surname, LocalDate.of(2000, 1, 1));
         lastResponse = restTemplate.postForEntity("/api/students", newStudent, StudentDTO.class);
     }
 

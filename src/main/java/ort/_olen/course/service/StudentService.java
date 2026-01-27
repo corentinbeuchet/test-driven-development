@@ -48,6 +48,7 @@ public class StudentService implements StudentRepository {
                 .map(existingEntity -> {
                     existingEntity.setName(studentDetails.name());
                     existingEntity.setSurname(studentDetails.surname());
+                    existingEntity.setBirthdate(studentDetails.birthdate());
                     return StudentMapper.toDTO(studentEntityRepository.save(existingEntity));
                 });
     }

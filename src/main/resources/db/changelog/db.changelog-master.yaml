@@ -3,3 +3,5 @@ databaseChangeLog:
       file: db/changelog/changes/001-create-student-table.yaml
   - include:
       file: db/changelog/changes/002-insert-initial-students.yaml
+  - include:
+      file: db/changelog/changes/003-add-birthdate-to-students.yaml

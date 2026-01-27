@@ -1,0 +1,29 @@
+databaseChangeLog:
+  - changeSet:
+      id: 20260129-1
+      author: Corentin Beuchet
+      changes:
+        - addColumn:
+            tableName: student
+            columns:
+              - column:
+                  name: birthdate
+                  type: date
+                  constraints:
+                    nullable: true
+
+  - changeSet:
+      id: 20260129-2
+      author: Corentin Beuchet
+      changes:
+        - sql:
+            sql: "update student set birthdate = date '2000-01-01' where birthdate is null"
+
+  - changeSet:
+      id: 20260129-3
+      author: Corentin Beuchet
+      changes:
+        - addNotNullConstraint:
+            tableName: student
+            columnName: birthdate
+            columnDataType: date

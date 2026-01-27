@@ -2,6 +2,7 @@ package ort._olen.course.jpa.entity;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDate;
 import java.util.Objects;
 
 @Entity
@@ -18,17 +19,21 @@ public class Student {
     @Column
     private String surname;
 
+    @Column
+    private LocalDate birthdate;
+
     public Student() {
     }
 
-    private Student(Long id, String name, String surname) {
+    private Student(Long id, String name, String surname, LocalDate birthdate) {
         this.id = id;
         this.name = name;
         this.surname = surname;
+        this.birthdate = birthdate;
     }
 
-    public static Student of(Long id, String name, String surname) {
-        return new Student(id, name, surname);
+    public static Student of(Long id, String name, String surname, LocalDate birthDate) {
+        return new Student(id, name, surname, birthDate);
     }
 
     public Long getId() {
@@ -53,6 +58,14 @@ public class Student {
 
     public void setSurname(String surname) {
         this.surname = surname;
+    }
+
+    public LocalDate getBirthdate() {
+        return birthdate;
+    }
+
+    public void setBirthdate(LocalDate birthDate) {
+        this.birthdate = birthDate;
     }
 
     @Override

@@ -1,5 +1,6 @@
 package ort._olen.course.controller;
 
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ort._olen.course.model.dto.StudentDTO;
@@ -9,7 +10,7 @@ import ort._olen.course.service.StudentService;
 import java.util.Collection;
 
 @RestController
-@RequestMapping("/api/students")
+@RequestMapping(value = "/api/students", produces = MediaType.APPLICATION_JSON_VALUE)
 public class StudentController {
 
     private final StudentService studentService;
@@ -31,12 +32,12 @@ public class StudentController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
-    @PostMapping
-    public StudentDTO createStudent(@RequestBody StudentSaveDTO student) {
-        return studentService.save(student);
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<StudentDTO> createStudent(@RequestBody StudentSaveDTO student) {
+        return ResponseEntity.ok(studentService.save(student));
     }
 
-    @PutMapping("/{id}")
+    @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<StudentDTO> updateStudent(@PathVariable Long id, @RequestBody StudentSaveDTO studentDetails) {
         return studentService.update(id, studentDetails)
                 .map(ResponseEntity::ok)
