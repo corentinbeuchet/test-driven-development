@@ -1,0 +1,22 @@
+#!/bin/sh
+# Enforce commit message prefix: feat:, fix:, chore:, machin:
+
+MSG_FILE="$1"
+FIRST_LINE="$(head -n 1 "$MSG_FILE" | tr -d '\r')"
+
+case "$FIRST_LINE" in
+  feat:*|fix:*|chore:*|machin:*)
+    exit 0
+    ;;
+  *)
+    echo "ERROR: Commit message must start with one of: feat:, fix:, chore:, machin:"
+    echo "Got: $FIRST_LINE"
+    echo
+    echo "Examples:"
+    echo "  feat: add students endpoint"
+    echo "  fix: handle null in service"
+    echo "  chore: bump dependencies"
+    echo "  machin: whatever this category means"
+    exit 1
+    ;;
+esac
