@@ -1,0 +1,39 @@
+#!/bin/sh
+# Reject pushes if any commit subject being pushed doesn't start with feat:/fix:/chore:
+
+is_valid_subject() {
+  case "$1" in
+    feat:*|fix:*|chore:*|machin:*) return 0 ;;
+    *) return 1 ;;
+  esac
+}
+
+# Git provides lines:
+#   <local_ref> <local_sha> <remote_ref> <remote_sha>
+while read -r local_ref local_sha remote_ref remote_sha
+do
+  # Deletion push: allow
+  if [ "$local_sha" = "0000000000000000000000000000000000000000" ]; then
+    continue
+  fi
+
+  # New branch push vs update
+  if [ "$remote_sha" = "0000000000000000000000000000000000000000" ]; then
+    range="$local_sha"
+  else
+    range="$remote_sha..$local_sha"
+  fi
+
+  git log --format=%s "$range" | while IFS= read -r subject
+  do
+    if ! is_valid_subject "$subject"; then
+      echo "ERROR: Push rejected due to invalid commit message:"
+      echo "  $subject"
+      echo
+      echo "Commit messages must start with: feat:, fix:, chore:"
+      exit 1
+    fi
+  done || exit 1
+done
+
+exit 0

@@ -7,6 +7,52 @@ on:
     branches: [ "main", "master" ]
 
 jobs:
+  commit-message-policy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout (full history for commit range checks)
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Validate commit messages (feat:/fix:/chore:)
+        shell: bash
+        run: |
+          set -euo pipefail
+          
+          pattern='^(feat|fix|chore):'
+          
+          if [[ "${GITHUB_EVENT_NAME}" == "pull_request" ]]; then
+            base="${{ github.event.pull_request.base.sha }}"
+            head="${{ github.event.pull_request.head.sha }}"
+            range="${base}..${head}"
+          else
+            before="${{ github.event.before }}"
+            after="${{ github.sha }}"
+          
+            # If this is the first push on a new branch, "before" can be all zeros.
+            if [[ "$before" == "0000000000000000000000000000000000000000" ]]; then
+              range="$after"
+            else
+              range="${before}..${after}"
+            fi
+          fi
+          
+          echo "Checking commit subjects in range: $range"
+          invalid=0
+          
+          while IFS= read -r subject; do
+            if [[ ! "$subject" =~ $pattern ]]; then
+              echo "::error::Invalid commit subject: $subject"
+              invalid=1
+            fi
+          done < <(git log --format=%s "$range")
+          
+          if [[ "$invalid" -ne 0 ]]; then
+            echo "Commit messages must start with feat:, fix:, or chore:."
+            exit 1
+          fi
+
   build:
     runs-on: ubuntu-latest
     permissions:

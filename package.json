@@ -1,0 +1,9 @@
+{
+  "name": "test-driven-development",
+  "private": true,
+  "version": "0.0.0",
+  "description": "Local git hooks installer (commit message convention)",
+  "scripts": {
+    "prepare": "node scripts/setup-githooks.js"
+  }
+}
