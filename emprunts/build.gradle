@@ -1,0 +1,20 @@
+// Partie 2 : double boucle (Cucumber à l'extérieur, TDD à l'intérieur) avec Spring Boot.
+plugins {
+    id 'org.springframework.boot'
+    id 'io.spring.dependency-management'
+}
+
+ext {
+    cucumberVersion = '7.34.6'
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-webmvc'
+
+    testImplementation 'org.springframework.boot:spring-boot-starter-webmvc-test'
+    testImplementation "io.cucumber:cucumber-java:${cucumberVersion}"
+    testImplementation "io.cucumber:cucumber-spring:${cucumberVersion}"
+    testImplementation "io.cucumber:cucumber-junit-platform-engine:${cucumberVersion}"
+    testImplementation 'org.junit.platform:junit-platform-suite'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
