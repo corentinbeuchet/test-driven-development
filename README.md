@@ -17,7 +17,7 @@ Dans ce TP, vous n'allez pas seulement écrire des tests : vous allez les écrir
 - Enchaîner des cycles **rouge → vert → refactor** courts, sans jamais écrire de code qu'aucun test n'exige
 - Laisser les tests faire émerger la conception (paramètres, objets, noms)
 - Écrire un scénario d'acceptation (Cucumber) **avant** la fonctionnalité, puis la construire en TDD : la **double boucle**
-- Prendre du recul : que devient le TDD quand une IA écrit le code… ou les tests ?
+- Prendre du recul : que devient le TDD quand une IA écrit le code, les tests… ou tout, en vibe coding ?
 
 ## Prérequis
 
@@ -49,7 +49,7 @@ git push -u origin main
 |---|---|---|
 | [Partie 1](PARTIE1_Kata.md) | Kata : les pénalités de retard, cycle par cycle | 2 h 30 |
 | [Partie 2](PARTIE2_Double_boucle.md) | Double boucle : Cucumber + TDD avec Spring Boot | 3 h |
-| [Partie 3](PARTIE3_TDD_et_IA.md) | TDD et IA : qui écrit les tests ? | 1 h 30 |
+| [Partie 3](PARTIE3_TDD_et_IA.md) | TDD et IA : vibe coding, tests d'abord, tests après | 2 h 30 |
 
 ## Comment votre travail est évalué
 
@@ -67,6 +67,6 @@ Un `git log --oneline` qui alterne `test:` / `feat:` / `refactor:` montre que vo
 
 ```text
 .
-├── kata/        # parties 1 et 3 : Java pur
+├── kata/        # parties 1 et 3 : Java pur (fees, reservation, renewal)
 └── emprunts/    # partie 2 : application Spring Boot + Cucumber
 ```
