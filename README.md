@@ -26,7 +26,7 @@ Dans ce TP, vous n'allez pas seulement écrire des tests : vous allez les écrir
 | Java (JDK) | 25 (LTS), à installer : Gradle ne le télécharge pas pour vous |
 | Gradle | 9.8.0, fourni par le wrapper `./gradlew` |
 | Spring Boot | 4.1.1 (partie 2, déjà configuré) |
-| JUnit / AssertJ / Cucumber | 6.1.3 (kata ; le module Spring Boot utilise la version qu'il gère) / 3.27.7 / 7.34.6 |
+| JUnit / AssertJ / Cucumber | 6.1.3 (kata ; le module Spring Boot utilise la version qu'il gère) / 3.27.7 / 8.0.2 |
 | Un assistant IA | celui de votre choix (partie 3) |
 
 ## Démarrer

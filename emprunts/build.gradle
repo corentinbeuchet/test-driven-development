@@ -5,7 +5,7 @@ plugins {
 }
 
 ext {
-    cucumberVersion = '7.34.6'
+    cucumberVersion = '8.0.2'
 }
 
 dependencies {
