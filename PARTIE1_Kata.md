@@ -64,7 +64,7 @@ Il faut maintenant savoir qui rend le livre : ajoutez un paramètre `MemberType 
 
 ## Étape 5 — Les nouveautés coûtent le double
 
-> Un livre de la catégorie nouveauté coûte 1 € par jour de retard. Le plafond reste de 10 €.
+> Un livre de la catégorie nouveauté coûte 1 € par jour de retard. Le plafond reste de 10 €, et les 3 jours de grâce des abonnés premium s'appliquent aussi aux nouveautés.
 
 Ajoutez `BookCategory category` (`STANDARD`, `NEW_RELEASE`).
 
@@ -81,6 +81,9 @@ Les tests doivent rester verts pendant **tout** le refactor.
 ## Étape 6 — Une date de retour absente est une erreur
 
 > `feeInCents(loan, null)` lève une `IllegalArgumentException`.
+
+- 💡 `assertThatThrownBy(() -> calculator.feeInCents(loan, null)).isInstanceOf(IllegalArgumentException.class).hasMessage("La date de retour est obligatoire")` : vérifiez aussi le message, il aide celui qui lira les logs.
+- 💡 Et une date de retour **avant** l'échéance ? Ce n'est pas une erreur (livre rendu en avance) : vous l'avez déjà couvert à l'étape 1 ou 2 ? Si non, c'est le moment d'écrire ce test.
 
 ## ✅ Terminé quand…
 
